@@ -1,0 +1,20 @@
+. blank
+S ship
+M miss
+H hit
+
+For run.rb senario to pass
+- return list of unplaced ships
+- record ship placement
+- return board state to UserInterface
+
+To be implemented
+- review coordinate logic: origin at bottom left of board; ships placed vertically upwards and horizontally right from given starting position
+    restructure array to record board state more intuitively
+- check whether ship available to validate user input (UserInterface)
+- record hits and/or sunk ships against ship list?
+- update ship_at? to handle hit ships
+
+Additional functionality
+- initialize Game with custom ship array, and board size, rather than hardcoding this
+- distinguish between cruiser and submaraine (both length 3 ships)

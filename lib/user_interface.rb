@@ -50,6 +50,6 @@ class UserInterface
         next "S" if @game.ship_at?(x, y)
         next "."
       end.join
-    end.join("\n")
+    end.reverse.join("\n")
   end
 end
