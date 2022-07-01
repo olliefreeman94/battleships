@@ -2,13 +2,16 @@ require "game"
 
 RSpec.describe Game do
   before(:example) do
-    @game = Game.new
+    @list = double :ship_list
+    @board = double :board, rows: 10, cols: 10
+    @game = Game.new(@list, @board)
   end
 
   describe "game setup" do
     context "initially" do
       it "returns list of unplaced ships" do
-        expect( @game.unplaced_ships ).to eq ["SSSSS", "SSSS", "SSS", "SSS", "SS"]
+        expect(@list).to receive(:unplaced).and_return ["SSSSS", "SSSS", "SSS", "SS"]
+        expect( @game.unplaced_ships ).to eq ["SSSSS", "SSSS", "SSS", "SS"]
       end
 
       it "returns number of rows and columns" do
@@ -17,6 +20,20 @@ RSpec.describe Game do
       end
 
       it "returns empty board" do
+        expect(@board).to receive(:board).and_return(
+          [
+          "..........", 
+          "..........",
+          "..........",
+          "..........",
+          "..........",
+          "..........",
+          "..........",
+          "..........",
+          "..........",
+          ".........."
+        ]
+        )
         expect( @game.board ).to eq [
           "..........", 
           "..........",
@@ -33,6 +50,9 @@ RSpec.describe Game do
 
       context "after a ship has been placed horiztontally on the board" do
         before(:example) do
+          expect(@list).to receive(:place).with(2)
+          expect(@board).to receive(:update).with("S", 0, 0)
+          expect(@board).to receive(:update).with("S", 1, 0)
           @game.place_ship(
             length: 2,
             orientation: :horizontal,
@@ -42,12 +62,27 @@ RSpec.describe Game do
         end
 
         it "returns updated list of unplaced ships" do
-          expect( @game.unplaced_ships ).to eq ["SSSSS", "SSSS", "SSS", "SSS"]
+          expect(@list).to receive(:unplaced).and_return ["SSSSS", "SSSS", "SSS"]
+          expect( @game.unplaced_ships ).to eq ["SSSSS", "SSSS", "SSS"]
         end
 
         it "returns updated board" do
+          expect(@board).to receive(:board).and_return(
+            [
+            "SS........", 
+            "..........",
+            "..........",
+            "..........",
+            "..........",
+            "..........",
+            "..........",
+            "..........",
+            "..........",
+            ".........."
+          ]
+          )
           expect( @game.board ).to eq [
-          "..........", 
+          "SS........", 
           "..........",
           "..........",
           "..........",
@@ -56,13 +91,16 @@ RSpec.describe Game do
           "..........",
           "..........",
           "..........",
-          "SS........"
+          ".........."
         ]
         end
       end
 
       context "after a ship has been placed vertically on the board" do
         before(:example) do
+          expect(@list).to receive(:place).with(2)
+          expect(@board).to receive(:update).with("S", 0, 0)
+          expect(@board).to receive(:update).with("S", 0, 1)
           @game.place_ship(
             length: 2,
             orientation: :vertical,
@@ -72,17 +110,31 @@ RSpec.describe Game do
         end
 
         it "returns updated board" do
+          expect(@board).to receive(:board).and_return(
+            [
+            "S.........", 
+            "S.........",
+            "..........",
+            "..........",
+            "..........",
+            "..........",
+            "..........",
+            "..........",
+            "..........",
+            ".........."
+          ]
+          )
           expect( @game.board ).to eq [
-          "..........", 
-          "..........",
-          "..........",
-          "..........",
-          "..........",
-          "..........",
-          "..........",
-          "..........",
+          "S.........", 
           "S.........",
-          "S........."
+          "..........",
+          "..........",
+          "..........",
+          "..........",
+          "..........",
+          "..........",
+          "..........",
+          ".........."
         ]
         end
       end
@@ -91,12 +143,29 @@ RSpec.describe Game do
 
   describe "checking board for ships" do
     before(:example) do
+      expect(@list).to receive(:place).with(2)
+      expect(@board).to receive(:update).with("S", 0, 0)
+      expect(@board).to receive(:update).with("S", 1, 0)
       @game.place_ship(
             length: 2,
             orientation: :horizontal,
             row: 1,
             col: 1
           )
+      allow(@board).to receive(:board).and_return(
+        [
+        "SS........", 
+        "..........",
+        "..........",
+        "..........",
+        "..........",
+        "..........",
+        "..........",
+        "..........",
+        "..........",
+        ".........."
+      ]
+      )
     end
 
     it "returns true when checked board location contains ship" do

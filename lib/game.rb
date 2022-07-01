@@ -1,14 +1,13 @@
 class Game
-  def initialize
-    @all_ships = ["SSSSS", "SSSS", "SSS", "SSS", "SS"]
-    @placed_ships = []
-    @rows = 10
-    @cols = 10
-    @board = construct_board(@rows, @cols)
+  def initialize(ship_list, board)
+    @ship_list = ship_list
+    @board = board
+    @rows = @board.rows
+    @cols = @board.cols
   end
 
   def unplaced_ships
-    return @all_ships - @placed_ships
+    return @ship_list.unplaced
   end
 
   def rows
@@ -20,36 +19,29 @@ class Game
   end
 
   def board
-    return @board
+    return @board.board
   end
 
   def place_ship(hash)
     length = hash[:length]
-    ship = "S" * length
-    @placed_ships << ship
+    @ship_list.place(length)
 
-    row = 10 - hash[:row]
-    col = hash[:col] - 1
+    x = hash[:col] - 1
+    y = hash[:row] - 1
     if hash[:orientation] == :horizontal
       (1..length).map do
-        @board[row][col] = "S"
-        col += 1
+        @board.update("S", x, y)
+        x += 1
       end
     elsif hash[:orientation] == :vertical
       (1..length).map do
-        @board[row][col] = "S"
-        row -= 1
+        @board.update("S", x, y)
+        y += 1
       end
     end
   end
 
   def ship_at?(x, y)
-    return @board[10 - y][x - 1] == "S"
-  end
-
-  private
-
-  def construct_board(rows, cols)
-    return (1..rows).map { "." * cols }
+    return @board.board[y - 1][x - 1] == "S"
   end
 end
