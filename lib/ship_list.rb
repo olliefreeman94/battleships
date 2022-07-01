@@ -16,10 +16,6 @@ class ShipList
   end
 
   def place(length)
-    @ships.each do |ship|
-      if ship.length == length && ship.placed? == false
-        ship.place
-      end
-    end
+    @ships.each { |ship| ship.place if ship.length == length && ship.placed? == false }
   end
 end

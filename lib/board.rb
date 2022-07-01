@@ -18,7 +18,7 @@ class Board
   end
 
   def update(status, x, y)
-    @board[y][x] = status
+    @board[y - 1][x - 1] = status
   end
 
   private

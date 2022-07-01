@@ -51,8 +51,8 @@ RSpec.describe Game do
       context "after a ship has been placed horiztontally on the board" do
         before(:example) do
           expect(@list).to receive(:place).with(2)
-          expect(@board).to receive(:update).with("S", 0, 0)
-          expect(@board).to receive(:update).with("S", 1, 0)
+          expect(@board).to receive(:update).with("S", 1, 1)
+          expect(@board).to receive(:update).with("S", 2, 1)
           @game.place_ship(
             length: 2,
             orientation: :horizontal,
@@ -99,8 +99,8 @@ RSpec.describe Game do
       context "after a ship has been placed vertically on the board" do
         before(:example) do
           expect(@list).to receive(:place).with(2)
-          expect(@board).to receive(:update).with("S", 0, 0)
-          expect(@board).to receive(:update).with("S", 0, 1)
+          expect(@board).to receive(:update).with("S", 1, 1)
+          expect(@board).to receive(:update).with("S", 1, 2)
           @game.place_ship(
             length: 2,
             orientation: :vertical,
@@ -144,8 +144,8 @@ RSpec.describe Game do
   describe "checking board for ships" do
     before(:example) do
       expect(@list).to receive(:place).with(2)
-      expect(@board).to receive(:update).with("S", 0, 0)
-      expect(@board).to receive(:update).with("S", 1, 0)
+      expect(@board).to receive(:update).with("S", 1, 1)
+      expect(@board).to receive(:update).with("S", 2, 1)
       @game.place_ship(
             length: 2,
             orientation: :horizontal,

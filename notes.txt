@@ -12,6 +12,7 @@ Ship records no. of hits and sunk? status (and occupied board locations?)
 GOAL: allow user to place all ships on board during game set up
 
 Task list
+- add #status to Board class
 - validate user input when placing ships
     (i.e. ship not already placed, valid orientation, valid board location, not overlapping another ship)
 - validate args passed to Game #ship_at?
@@ -22,5 +23,4 @@ Task list
 - create integration test suite
 
 Additional functionality
-- initialize Game with custom ship array, and board size, rather than hardcoding this
 - allow duplicate ship lengths within ship list (e.g. cruiser and submarine, both length 3)

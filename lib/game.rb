@@ -26,8 +26,8 @@ class Game
     length = hash[:length]
     @ship_list.place(length)
 
-    x = hash[:col] - 1
-    y = hash[:row] - 1
+    x = hash[:col]
+    y = hash[:row]
     if hash[:orientation] == :horizontal
       (1..length).map do
         @board.update("S", x, y)

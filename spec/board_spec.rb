@@ -27,8 +27,8 @@ RSpec.describe Board do
 
     context "after ship has been placed on board" do
       before(:example) do
-        @board.update("S", 2, 2)
-        @board.update("S", 2, 3)
+        @board.update("S", 3, 3)
+        @board.update("S", 3, 4)
       end
     
       it "records ship at that location" do
