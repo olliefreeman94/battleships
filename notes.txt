@@ -18,6 +18,7 @@ Task list
 - validate args passed to Game #ship_at?
 - refactor UserInterface #run, and update run.rb set up and script
 - update Game #ship_at? to handle hit ships?
+- refactor to use MVC model?
 - update UserInterface to handle formatting terminal output (e.g. list of unplaced ships)
     then update other classes to return unformatted information
 - create integration test suite
