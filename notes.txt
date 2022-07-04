@@ -9,8 +9,6 @@ Board origin (1, 1) at bottom left corner
 Board records ship, miss, hit locations
 Ship records no. of hits and sunk? status (and occupied board locations?)
 
---
-
 GOAL: allow user to place all ships on board during game set up
 
 Task list
